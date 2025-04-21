@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrinho</title>
+
+  <link rel="stylesheet" href="../css/header-style.css">
+  <link rel="stylesheet" href="../css/footer-style.css">
+  <link rel="stylesheet" href="../css/carrinho.css">
+  <script src="../js/tema.js" defer></script>
+</head>
+<body>
+  <button id="toggle-theme">Alternar Tema</button>
+
+  <!-- NAVBAR -->
+  <header>
+    <div id="logo-title">
+        <div class="logo">
+            <img src="../assets/logo.png" alt="logo" width="120" height="120">
+        </div>
+        <h1>Mercado <br>Econômico</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>                        
+            <li><a href="produto.html">Produtos</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="contato.html">Contato</a></li>
+            <li><a href="carrinho.html">Carrinho</a></li>
+        </ul>
+    </nav>
+    <!-- Barra de Pesquisa -->
+    <div class="search-container">
+        <input class="search-input" type="text" id="search" placeholder="Pesquise aqui por produto e/ou marca..." autocomplete="off">
+        <button class="search-button">
+            <img src="../assets/svg/lupa.svg" alt="Lupa">
+        </button>
+    </div>
+  </header>
+
+  <h2>🛒 Meu Carrinho</h2>
+  <div class="cart" id="cart">
+
+    <div class="cart-item" data-price="60.00">
+      <div class="item-info">
+        <img src="../assets/fotos/produtos/maça.png" alt="Produto">
+        <div class="item-details">
+          <span class="item-name">maçã Sekai Ichi </span>
+          <div class="quantity-controls">
+            <button onclick="updateQuantity(this, -1)">−</button>
+            <input type="text" class="quantity" value="1" readonly>
+            <button onclick="updateQuantity(this, 1)">+</button>
+          </div>
+          <button class="remove-btn" onclick="removeItem(this)">Remover</button>
+        </div>
+      </div>
+      <div class="item-price">R$ <span class="item-total">60.00</span></div>
+    </div>
+
+    <!-- Delivery -->
+    <div class="delivery-option">
+      <label><input type="checkbox" id="deliveryCheckbox" onchange="toggleDelivery()"> Quero entrega (delivery)</label>
+      <div class="cep-field" id="cepField">
+        <input type="text" id="cepInput" placeholder="CEP (00000-000)" maxlength="9" onblur="buscarEndereco()">
+        <input type="text" id="rua" placeholder="Rua" readonly>
+        <input type="text" id="bairro" placeholder="Bairro" readonly>
+        <input type="text" id="cidade" placeholder="Cidade" readonly>
+        <input type="text" id="estado" placeholder="Estado" readonly>
+      </div>
+    </div>
+
+    <!-- Resumo -->
+    <div class="cart-summary">
+      Subtotal: R$ <span id="subtotal">60.00</span><br>
+      Frete: <span id="frete">R$ 0,00</span><br>
+      <strong>Total: R$ <span id="cart-total">60.00</span></strong>
+    </div>
+
+    <!-- Ações -->
+    <div class="cart-actions">
+      <a href="index.html" class="continue-btn">← Continuar comprando</a>
+      <button class="checkout-btn" onclick="finalizarPedido()">Finalizar pedido ✅</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+        <p>&copy; 2025 Mercado Econômico - Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const freteFixo = 15.00;
+
+    function updateQuantity(btn, change) {
+      const input = btn.parentNode.querySelector('.quantity');
+      let qnt = Math.max(1, parseInt(input.value) + change);
+      input.value = qnt;
+
+      const item = btn.closest('.cart-item');
+      const unitPrice = parseFloat(item.dataset.price);
+      item.querySelector('.item-total').textContent = (unitPrice * qnt).toFixed(2);
+
+      updateCartTotal();
+    }
+
+    function removeItem(btn) {
+      btn.closest('.cart-item').remove();
+      updateCartTotal();
+    }
+
+    function toggleDelivery() {
+      const checked = document.getElementById('deliveryCheckbox').checked;
+      document.getElementById('cepField').style.display = checked ? 'block' : 'none';
+      updateCartTotal();
+    }
+
+    function buscarEndereco() {
+      const cep = document.getElementById('cepInput').value.replace(/\D/g, '');
+      if (cep.length !== 8) return;
+
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.erro) {
+            alert("CEP não encontrado.");
+            return;
+          }
+          document.getElementById('rua').value = data.logradouro;
+          document.getElementById('bairro').value = data.bairro;
+          document.getElementById('cidade').value = data.localidade;
+          document.getElementById('estado').value = data.uf;
+        })
+        .catch(() => alert("Erro ao buscar endereço."));
+    }
+
+    function updateCartTotal() {
+      const items = document.querySelectorAll('.cart-item');
+      let subtotal = 0;
+      items.forEach(item => {
+        subtotal += parseFloat(item.querySelector('.item-total').textContent);
+      });
+
+      let frete = 0;
+      if (document.getElementById('deliveryCheckbox').checked && subtotal < 100) {
+        frete = freteFixo;
+      }
+
+      document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+      document.getElementById('frete').textContent = frete === 0 ? 'Grátis' : `R$ ${frete.toFixed(2)}`;
+      document.getElementById('cart-total').textContent = (subtotal + frete).toFixed(2);
+    }
+
+    function finalizarPedido() {
+      const total = document.getElementById('cart-total').textContent;
+      const delivery = document.getElementById('deliveryCheckbox').checked;
+      const cep = document.getElementById('cepInput').value;
+
+      if (delivery && !cep) {
+        alert("Informe o CEP para entrega.");
+        return;
+      }
+
+      alert(`Pedido finalizado!\nTotal: R$ ${total}\n${delivery ? "Entrega no CEP: " + cep : "Retirada na loja."}`);
+    }
+
+    updateCartTotal();
+  </script>
+
+</body>
+</html>

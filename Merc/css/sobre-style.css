@@ -1,0 +1,57 @@
+main {
+    height: 90vh;
+    width: 100%;
+    padding: 7% 20%;    
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+body.light .main {
+    background-color: white;
+    color: black;
+  }
+  
+  body.dark .main {
+    background-color: #121212;
+    color: white;
+  }
+  
+
+main div#company-ahcivements {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+main div#company-ahcivements > :nth-child(2) {
+    border-inline: 1px solid rgba(235, 129, 1, .4);
+    padding-inline: 45px;
+}
+
+main div#company-ahcivements div.achivement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+}
+
+main div#company-ahcivements div.achivement span {
+    font-size: 16px;
+    color: #9c9b9b;
+    letter-spacing: 4px;
+}
+
+main div#company-ahcivements div.achivement strong {
+    font-size: 34px;
+    color: #eb8101;
+}
+
+@media (max-width: 768px) {
+    main div#company-ahcivements {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+  

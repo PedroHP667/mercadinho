@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Econômico</title>
+
+    <!-- Links de Estilos -->
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/header-style.css">
+    <link rel="stylesheet" href="../css/footer-style.css">
+
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Script Tema -->
+    <script src="../js/tema.js" defer></script>
+</head>
+<body class="light"> <!-- Começa com tema light -->
+
+    <!-- Botão para Alternar Tema -->
+    <button id="toggle-theme">Alternar Tema</button>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div id="logo-title">
+            <div class="logo">
+                <img src="../assets/logo.png" alt="logo" width="120" height="120">
+            </div>
+            <h1>Mercado <br>Econômico</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>                        
+                <li><a href="produto.html">Produtos</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="carrinho.html">Seu Carrinho</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+        <!-- Barra de Pesquisa -->
+        <div class="search-container">
+            <input class="search-input" type="text" id="search" placeholder="Pesquise aqui por produto e/ou marca..." autocomplete="off">
+            <button class="search-button">
+                <img src="../assets/svg/lupa.svg" alt="Lupa">
+            </button>
+        </div>
+    </header>
+
+    <section class="gallery">
+        <br>
+        <div class="gallery-container">
+            <img id="gallery-image" src="" alt="Imagem da galeria">
+            <div class="gallery-descriptions" id="gallery-description">Descrição da imagem 1</div>
+            <div class="gallery-controls">
+                <button id="prev">❮</button>
+                <button id="next">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Galeria de Imagens
+        const images = [
+            { src: '../assets/fotos/Banner.png'},
+            { src: '../assets/fotos/BannerPizza.jpg'},
+            { src: '../assets/fotos/BannerBebida.png'}
+        ];
+        let currentIndex = 0;
+
+        const imgElement = document.getElementById('gallery-image');
+        const descriptionElement = document.getElementById('gallery-description');
+
+        function updateGallery() {
+            imgElement.src = images[currentIndex].src;
+            descriptionElement.textContent = images[currentIndex].description;
+        }
+
+        document.getElementById('prev').addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            updateGallery();
+        });
+
+        document.getElementById('next').addEventListener('click', () => {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            updateGallery();
+        });
+
+        updateGallery();
+    </script>
+
+    <!-- Seção de Produtos -->
+    <section class="produtos">
+        <div class="container">
+            <h2>Nossos Produtos</h2>
+            <div class="produtos-lista">
+                <div class="produto">
+                    <img src="../assets/fotos/produtos/cebola.png" alt="Produto 1">  
+                    <h3>Cebola</h3>
+                    <p>Descrição do produto.</p>
+                    <button>Adicionar ao Carrinho</button>
+                </div>
+                <div class="produto">
+                    <img src="../assets/fotos/produtos/tomate.png" alt="Produto 2">
+                    <h3>Tomate</h3>
+                    <p>Descrição do produto.</p>
+                    <button>Adicionar ao Carrinho</button>
+                </div>
+                <div class="produto">
+                    <img src="../assets/fotos/produtos/limao.png" alt="Produto 3">
+                    <h3>Limão</h3>
+                    <p>Descrição do produto.</p>
+                    <button>Adicionar ao Carrinho</button>
+                </div>
+                <div class="produto">
+                    <img src="../assets/fotos/produtos/alho.png" alt="Produto 4">
+                    <h3>Alho</h3>
+                    <p>Descrição do produto.</p>
+                    <button>Adicionar ao Carrinho</button>
+                </div>
+                <div class="produto">
+                    <img src="../assets/fotos/produtos/hortela.png" alt="Produto 5">
+                    <h3>Hortelã</h3>
+                    <p>Descrição do produto.</p>
+                    <button>Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programa de Pontos -->
+    <section class="fidelidade">
+        <div class="container">
+            <h2>Programa de Pontos</h2>
+            <p class="descricao-fidelidade">
+                Ganhe pontos em cada compra e troque por descontos exclusivos ou brindes!
+            </p>
+            <div class="cartoes-fidelidade">
+                <div class="cartao">
+                    <h3>🛒 Ganhe Pontos</h3>
+                    <p>Receba 1 ponto a cada R$10 em compras.</p>
+                </div>
+                <div class="cartao">
+                    <h3>🎁 Troque por Prêmios</h3>
+                    <p>Acumule pontos e troque por produtos selecionados ou descontos.</p>
+                </div>
+                <div class="cartao">
+                    <h3>💳 Cadastro Gratuito</h3>
+                    <p>Basta ter uma conta e comprar conosco. Sem taxas!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mercado Econômico - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

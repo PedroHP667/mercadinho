@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    line-height: 1.6;
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    outline: none;
+    border: none;
+}
+
+
+/**/
+
+/* global.css */
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  body {
+    background-color: #f9f9f9;
+    color: #333333;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  

@@ -1,0 +1,194 @@
+main {
+    width: 100%;
+    height: 90vh;
+    padding-block: 7%;
+
+    animation: invisibleToVisible 2s ease-in-out 0.1s backwards;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+    gap: 90px;
+
+    background-color: #F4F4F4;
+}
+
+main #contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    width: fit-content;
+    color: #0A1B23;
+}
+
+main #contact-options > strong {
+    font-size: 27px;
+    text-align: center;
+}
+
+main #contact-options > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+main #contact-options > div div.contact-way {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+
+    font-size: 16px;
+}
+
+main #contact-options > div div.contact-way > :first-child {
+    height: 50px;
+    width: 50px;
+
+    padding: 9px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 100%;
+    border: 2px solid #E1E1E1;
+}
+
+main #contact-options > div div.contact-way > :first-child img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+main form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    height: 400px;
+}
+
+main form > :first-child {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+main form > :first-child input {
+    border: 1px solid #E1E1E1;
+    border-radius: 10px;
+
+    padding: 15px 12px;
+    width: 100%;
+    height: 100%;
+
+    font-size: 13px;
+
+    background: transparent;
+    box-shadow: 1px 17px 25px -10px rgba(10,27,35,0.17);
+
+    transition: all 500ms ease-in-out;
+}
+
+main form > :first-child input:focus {
+    outline: none;
+
+    border: 1px solid #FF8C00;
+}
+
+main form textarea {
+    resize: none;
+
+    border: 1px solid #E1E1E1;
+    border-radius: 10px;
+
+    padding: 15px 12px;
+    width: 100%;
+    height: 100%;
+
+    font-size: 13px;
+
+    background: transparent;
+    box-shadow: 1px 17px 25px -10px rgba(10,27,35,0.17);
+
+    transition: all 500ms ease-in-out;
+}
+
+main form textarea:focus {
+    outline: none;
+
+    border: 1px solid #FF8C00;
+}
+
+main form button:last-child {
+    position: relative;
+
+    align-self: flex-end;
+
+    width: 150px;
+    padding: 15px 30px;
+
+    background-color: #E1E1E1;
+
+    border: 1px solid rgba(10,27,35,0.09);
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+main form button:last-child::after {
+    content: '';
+
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+
+    width: 0;
+    height: 100%;
+
+    border-radius: 7px;
+    background-color: #FF8C00;
+
+    transition: width 350ms ease-in-out 251ms;
+}
+
+main form button:last-child:hover:after {
+    width: 100%;
+}
+
+main form button:last-child span {
+    position: relative;
+    z-index: 2;
+    
+    transition: color ease-in-out 250ms;
+    
+    color: #0A1B23;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+main form button:last-child:hover span {
+    color: #FFF;
+    z-index: 2;
+}
+
+
+body.light .main {
+    background-color: white;
+    color: black;
+  }
+  
+  body.dark .main {
+    background-color: #121212;
+    color: white;
+  }
+  

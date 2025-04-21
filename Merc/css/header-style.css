@@ -1,0 +1,146 @@
+header {
+    width: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #FF8C00;
+    padding: 15px;
+
+    border-bottom: 1px solid #d8d8d8;
+}
+
+header #logo-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+}
+
+header #logo-title .logo {
+    height: 50px;
+    width: 100px;
+}
+
+header #logo-title .logo img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+header #logo-title h1 {
+    font-size: 2.1em;
+    line-height: 1.2;
+    text-shadow: -2px 1px 2px rgba(21, 61, 80, .2);
+    -webkit-text-stroke: .15px white;
+   color: #0A1B23;
+}
+
+header nav {
+    width: 30%;
+    align-self: center;
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    position: relative;
+
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+header nav ul li a::after {
+    content: '';
+    width: 0;
+    height: 1.4px;
+    background-color: #FFF;
+    
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+
+    transition: width 450ms ease-in-out;
+}
+
+header nav ul li a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Barra de Pesquisa */
+.search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background-color: #eb8304;
+
+    border: 1px solid transparent;
+    border-radius: 18px;
+
+    width: 30%;
+
+    transition: 250ms ease-in-out all;
+}
+
+.search-container:focus-within {
+    border: 1px solid #e9dfdf;
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+  }
+
+.search-input {
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+    padding: 10px 15px;
+    width: 70%;
+
+    font-size: 1em;
+    outline: none;
+    color: #fdfdfd;
+
+    width: 87%;
+}
+
+.search-input::placeholder {
+    color: white;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    font-size: 1.2em;
+    color: #FFF;
+
+    width: fit-content;
+}
+
+body.light .main {
+    background-color: white;
+    color: black;
+  }
+  
+  body.dark .main {
+    background-color: #121212;
+    color: white;
+  }
+  

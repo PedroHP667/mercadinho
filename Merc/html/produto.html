@@ -1,0 +1,203 @@
+<!DOCTYPE html> 
+<html lang="pt-br"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Mercado Econômico</title> 
+    <link rel="stylesheet" href="../css/home.css"> 
+    <link rel="stylesheet" href="../css/global.css"> 
+    <link rel="stylesheet" href="../css/header-style.css"> 
+    <link rel="stylesheet" href="../css/footer-style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet"> 
+    <style> 
+        /* Adicionando o estilo para o modo claro e escuro */
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        /* Estilo do botão de alternância de tema */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .theme-toggle:hover {
+            background-color: #218838;
+        }
+    </style>
+</head> 
+<body> 
+    <header> 
+        <div id="logo-title"> 
+            <div class="logo"> 
+                <img src="../assets/logo.png" alt="logo" width="120" height="120"> 
+            </div> 
+            <h1>Mercado <br>Econômico</h1> 
+        </div> 
+        <nav> 
+            <ul> 
+                <li><a href="index.html">Início</a></li> 
+                <li><a href="./produto.html">Produtos</a></li> 
+                <li><a href="./sobre.html">Sobre</a></li> 
+                <li><a href="./contato.html">Contato</a></li> 
+                <li><a href="carrinho.html">Seu Carrinho</a></li> 
+            </ul> 
+        </nav> 
+        <div class="search-container"> 
+            <input class="search-input" type="text" id="search" placeholder="Pesquise aqui por produto e/ou marca..." autocomplete="off"> 
+            <button class="search-button"> 
+                <img src="../assets/svg/lupa.svg" alt="Lupa"> 
+            </button> 
+        </div> 
+    </header> 
+
+    <!-- Botão para alternar entre tema claro e escuro -->
+    <button class="theme-toggle" id="theme-toggle">Alternar Tema</button>
+
+    <section class="produtos"> 
+        <div class="container"> 
+            <h2>Nossos Produtos</h2> 
+            <!-- Filtros --> 
+            <div class="filtros"> 
+                <select id="filtro-categoria"> 
+                    <option value="todos">Todas as Categorias</option> 
+                    <option value="hortifruti">Hortifruti</option> 
+                    <option value="temperos">Temperos</option> 
+                    <option value="bebidas">Bebidas</option> 
+                    <option value="limpeza">Limpeza</option> 
+                    <option value="padaria">Padaria</option> 
+                    <option value="congelados">Congelados</option> 
+                </select> 
+                <select id="filtro-preco"> 
+                    <option value="todos">Todos os preços</option> 
+                    <option value="0-2">Até R$2,00</option> 
+                    <option value="2-5">R$2,00 - R$5,00</option> 
+                    <option value="5+">Acima de R$5,00</option> 
+                </select> 
+            </div> 
+            <div class="produtos-lista" id="lista-produtos"></div> 
+        </div> 
+    </section> 
+
+    <footer> 
+        <div class="container"> 
+            <p>&copy; 2025 Mercado Econômico - Todos os direitos reservados.</p> 
+        </div> 
+    </footer> 
+
+    <script>
+        const produtos = [
+            // Hortifruti 
+{ nome: "Cebola", categoria: "hortifruti", preco: 3.50, imagem: "../assets/fotos/produtos/cebola.png" }, 
+{ nome: "Tomate", categoria: "hortifruti", preco: 4.20, imagem: "../assets/fotos/produtos/tomate.png" }, 
+{ nome: "Limão", categoria: "hortifruti", preco: 2.00, imagem: "../assets/fotos/produtos/limao.png" }, 
+{ nome: "Alface", categoria: "hortifruti", preco: 1.80, imagem: "../assets/fotos/produtos/alface.png" }, 
+{ nome: "Batata", categoria: "hortifruti", preco: 3.00, imagem: "../assets/fotos/produtos/Batata.png" }, 
+{ nome: "Cenoura", categoria: "hortifruti", preco: 2.50, imagem: "../assets/fotos/produtos/Cenoura.png" }, 
+{ nome: "Maçã", categoria: "hortifruti", preco: 4.00, imagem: "../assets/fotos/produtos/maça.png" }, 
+{ nome: "Banana", categoria: "hortifruti", preco: 3.80, imagem: "../assets/fotos/produtos/Banana.png" }, 
+{ nome: "Abobrinha", categoria: "hortifruti", preco: 3.20, imagem: "../assets/fotos/produtos/Abobrinha.png" }, 
+{ nome: "Repolho", categoria: "hortifruti", preco: 2.70, imagem: "../assets/fotos/produtos/Repolho.png" }, 
+// Temperos 
+{ nome: "Alho", categoria: "temperos", preco: 6.50, imagem: "../assets/fotos/produtos/alho.png" }, 
+{ nome: "Hortelã", categoria: "temperos", preco: 1.50, imagem: "../assets/fotos/produtos/hortela.png" }, 
+{ nome: "Pimenta", categoria: "temperos", preco: 2.30, imagem: "../assets/fotos/produtos/Pimenta.png" }, 
+{ nome: "Orégano", categoria: "temperos", preco: 2.00, imagem: "../assets/fotos/produtos/Orégano.png" }, 
+{ nome: "Manjericão", categoria: "temperos", preco: 2.50, imagem: "../assets/fotos/produtos/Manjericão.png" }, 
+{ nome: "Alecrim", categoria: "temperos", preco: 1.80, imagem: "../assets/fotos/produtos/Alecrim.png" }, 
+{ nome: "Curry", categoria: "temperos", preco: 2.90, imagem: "../assets/fotos/produtos/Curry.png" }, 
+// Bebidas 
+{ nome: "Refrigerante Cola", categoria: "bebidas", preco: 5.99, imagem: "../assets/fotos/produtos/refri.png" }, 
+{ nome: "Suco de Laranja", categoria: "bebidas", preco: 4.99, imagem: "../assets/fotos/produtos/suco.png" }, 
+{ nome: "Água Mineral", categoria: "bebidas", preco: 2.50, imagem: "../assets/fotos/produtos/água.png" }, 
+{ nome: "Cerveja", categoria: "bebidas", preco: 3.90, imagem: "../assets/fotos/produtos/cerveja.png" }, 
+{ nome: "Energético", categoria: "bebidas", preco: 6.50, imagem: "../assets/fotos/produtos/energetico.png" }, 
+{ nome: "Chá Gelado", categoria: "bebidas", preco: 3.50, imagem: "../assets/fotos/produtos/chá.png" }, 
+{ nome: "Leite Integral", categoria: "bebidas", preco: 4.20, imagem: "../assets/fotos/produtos/leite.png" }, 
+{ nome: "Iogurte Natural", categoria: "bebidas", preco: 3.60, imagem: "../assets/fotos/produtos/iogurte.png" }, 
+// Limpeza 
+{ nome: "Detergente", categoria: "limpeza", preco: 1.99, imagem: "../assets/fotos/produtos/detergente.png" }, 
+{ nome: "Desinfetante", categoria: "limpeza", preco: 3.75, imagem: "../assets/fotos/produtos/desinfetante.png" }, 
+{ nome: "Sabão em pó", categoria: "limpeza", preco: 7.50, imagem: "../assets/fotos/produtos/sabão.png" }, 
+{ nome: "Esponja", categoria: "limpeza", preco: 1.20, imagem: "../assets/fotos/produtos/esponja.png" }, 
+{ nome: "Água sanitária", categoria: "limpeza", preco: 2.90, imagem: "../assets/fotos/produtos/aguasanitaria.png" }, 
+{ nome: "Amaciante", categoria: "limpeza", preco: 5.00, imagem: "../assets/fotos/produtos/amaciante.png" }, 
+// Padaria 
+{ nome: "Pão Francês", categoria: "padaria", preco: 0.50, imagem: "../assets/fotos/produtos/pao.png" }, 
+{ nome: "Bolo de Chocolate", categoria: "padaria", preco: 9.90, imagem: "../assets/fotos/produtos/bolo.png" }, 
+{ nome: "Pão de Forma", categoria: "padaria", preco: 6.00, imagem: "../assets/fotos/produtos/paodeforma.png" }, 
+{ nome: "Croissant", categoria: "padaria", preco: 3.00, imagem: "../assets/fotos/produtos/croissant.png" }, 
+{ nome: "Pão Integral", categoria: "padaria", preco: 6.20, imagem: "../assets/fotos/produtos/paointegral.png" }, 
+{ nome: "Rosquinha", categoria: "padaria", preco: 3.50, imagem: "../assets/fotos/produtos/rosquinha.png" }, 
+{ nome: "Pão de Queijo", categoria: "padaria", preco: 4.80, imagem: "../assets/fotos/produtos/paoqueijo.png" }, 
+// Congelados 
+{ nome: "Pizza Congelada", categoria: "congelados", preco: 12.90, imagem: "../assets/fotos/produtos/pizza.png" }, 
+{ nome: "Lasanha Congelada", categoria: "congelados", preco: 10.50, imagem: "../assets/fotos/produtos/lasanha.png" }, 
+{ nome: "Hambúrguer Congelado", categoria: "congelados", preco: 11.00, imagem: "../assets/fotos/produtos/hamburguer.png" }, 
+{ nome: "Frango Empanado", categoria: "congelados", preco: 15.00, imagem: "../assets/fotos/produtos/frango.png" }, 
+{ nome: "Sorvete de Chocolate", categoria: "congelados", preco: 18.50, imagem: "../assets/fotos/produtos/sorvete.png" }, 
+{ nome: "Nuggets", categoria: "congelados", preco: 9.90, imagem: "../assets/fotos/produtos/nuggets.png" }, 
+{ nome: "Polpa de Fruta", categoria: "congelados", preco: 5.00, imagem: "../assets/fotos/produtos/polpa.png" } 
+ ];
+
+        const lista = document.getElementById("lista-produtos");
+        const filtroCategoria = document.getElementById("filtro-categoria");
+        const filtroPreco = document.getElementById("filtro-preco");
+
+        function filtrarProdutos() {
+            const categoria = filtroCategoria.value;
+            const preco = filtroPreco.value;
+            lista.innerHTML = "";
+            produtos.forEach(produto => {
+                const dentroCategoria = categoria === "todos" || produto.categoria === categoria;
+                let dentroPreco = true;
+                if (preco === "0-2") dentroPreco = produto.preco <= 2;
+                else if (preco === "2-5") dentroPreco = produto.preco > 2 && produto.preco <= 5;
+                else if (preco === "5+") dentroPreco = produto.preco > 5;
+                if (dentroCategoria && dentroPreco) {
+                    const div = document.createElement("div");
+                    div.className = "produto";
+                    div.innerHTML = `
+                        <img src="${produto.imagem}" alt="${produto.nome}">
+                        <h3>${produto.nome}</h3>
+                        <p>Preço: R$ ${produto.preco.toFixed(2)}</p>
+                        <button onclick="adicionarAoCarrinho('${produto.nome}', ${produto.preco}, '${produto.imagem}')">Adicionar ao Carrinho</button>
+                    `;
+                    lista.appendChild(div);
+                }
+            });
+        }
+
+        filtroCategoria.addEventListener("change", filtrarProdutos);
+        filtroPreco.addEventListener("change", filtrarProdutos);
+        window.onload = filtrarProdutos;
+
+        // Função para adicionar produto ao carrinho
+        const carrinho = [];
+
+        function adicionarAoCarrinho(nome, preco, imagem) {
+            carrinho.push({ nome, preco, imagem });
+            alert(`${nome} foi adicionado ao carrinho!`);
+            console.log(carrinho); // Aqui podemos verificar o conteúdo do carrinho no console
+        }
+
+        
+    </script> 
+</body> 
+<script src="../js/tema.js"></script>
+</html>
